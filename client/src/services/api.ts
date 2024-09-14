@@ -3,17 +3,26 @@ import { getDatabase, ref, push, set, get, query, orderByKey, limitToLast, runTr
 import { app } from './firebase';
 
 // const API_BASE_URL = 'http://localhost:4444/api'; // Updated to match server port
-const API_BASE_URL = 'https://ai-movie-chatbot-server-5ek70n6yv-chymezys-projects.vercel.app/api';
+const API_BASE_URL = process.env.REACT_APP_API_BASE_URL || 'https://ai-movie-chatbot-server-sjbbdbjrg-chymezys-projects.vercel.app/api';
+console.log('API_BASE_URL:', API_BASE_URL); // Add this line for debugging
 
 const database = getDatabase(app);
 
+const axiosInstance = axios.create({
+  baseURL: API_BASE_URL,
+  withCredentials: true,
+  headers: {
+    'Content-Type': 'application/json',
+  }
+});
+
 export const sendChatMessage = async (message: string) => {
-  const response = await axios.post(`${API_BASE_URL}/chat`, { message });
+  const response = await axiosInstance.post('/chat', { message });
   return response.data.response;
 };
 
 export const searchMovie = async (title: string) => {
-  const response = await axios.get(`${API_BASE_URL}/movie`, { params: { title } });
+  const response = await axiosInstance.get('/movie', { params: { title } });
   return response.data;
 };
 
@@ -23,7 +32,7 @@ export const getWeatherMovieRecommendation = async (city: string, lat?: number, 
     params.lat = lat;
     params.lon = lon;
   }
-  const response = await axios.get(`${API_BASE_URL}/weather-movie-recommendation`, { params });
+  const response = await axiosInstance.get('/weather-movie-recommendation', { params });
   return response.data;
 };
 

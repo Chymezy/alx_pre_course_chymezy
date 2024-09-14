@@ -9,9 +9,27 @@ import connectDatabases from './database';
 const app = express();
 const port = process.env.PORT || 4444;
 
+const allowedOrigins = ['https://login-1d5ca.web.app', 'http://localhost:3000', 'http://localhost:5000'];
+
+// CORS configuration
+app.use(cors({
+  origin: function(origin, callback) {
+    if (!origin || allowedOrigins.indexOf(origin) !== -1) {
+      callback(null, true);
+    } else {
+      callback(new Error('Not allowed by CORS'));
+    }
+  },
+  credentials: true
+}));
+
 // Middleware
-app.use(cors());
 app.use(express.json());
+
+// Handle preflight requests
+app.options('*', (req, res) => {
+  res.sendStatus(200);
+});
 
 // Routes
 app.use('/api', apiRoutes);
