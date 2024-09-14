@@ -3,7 +3,7 @@ import { getDatabase, ref, push, set, get, query, orderByKey, limitToLast, runTr
 import { app } from './firebase';
 
 // const API_BASE_URL = 'http://localhost:4444/api'; // Updated to match server port
-const API_BASE_URL = 'https://your-vercel-deployment-url.vercel.app/api';
+const API_BASE_URL = 'https://ai-movie-chatbot-server-5ek70n6yv-chymezys-projects.vercel.app/api';
 
 const database = getDatabase(app);
 
