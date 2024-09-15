@@ -8,6 +8,10 @@ import { getCurrentUser, signOutUser } from './services/auth';
 import { motion, AnimatePresence } from 'framer-motion';
 import { ToastContainer } from 'react-toastify';
 import 'react-toastify/dist/ReactToastify.css';
+import { initializeApp } from "firebase/app";
+import { firebaseConfig, app as firebaseApp } from './services/firebase';
+
+console.log("Firebase app:", firebaseApp);
 
 interface Movie {
   id: number;  // Add this line

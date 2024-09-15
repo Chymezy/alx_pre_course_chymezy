@@ -3,10 +3,8 @@
   "version": "1.0.0",
   "main": "index.js",
   "scripts": {
-    "start": "ts-node src/server.ts",
-    "dev": "nodemon --exec ts-node src/server.ts",
-    "test": "NODE_ENV=test dotenv -e .env.test -- jest --runInBand --detectOpenHandles --forceExit",
-    "test:watch": "jest --watch"
+    "start": "node dist/server.js",
+    "build": "tsc"
   },
   "keywords": [],
   "author": "",

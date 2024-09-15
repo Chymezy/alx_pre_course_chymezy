@@ -2,9 +2,8 @@ import axios from 'axios';
 import { getDatabase, ref, push, set, get, query, orderByKey, limitToLast, runTransaction, endBefore } from "firebase/database";
 import { app } from './firebase';
 
-// const API_BASE_URL = 'http://localhost:4444/api'; // Updated to match server port
-const API_BASE_URL = process.env.REACT_APP_API_BASE_URL || 'https://ai-movie-chatbot-server-sjbbdbjrg-chymezys-projects.vercel.app/api';
-console.log('API_BASE_URL:', API_BASE_URL); // Add this line for debugging
+const API_BASE_URL = process.env.REACT_APP_API_BASE_URL || 'https://your-back4app-container-url.back4app.io/api';
+console.log('API_BASE_URL:', API_BASE_URL);
 
 const database = getDatabase(app);
 
@@ -22,8 +21,15 @@ export const sendChatMessage = async (message: string) => {
 };
 
 export const searchMovie = async (title: string) => {
-  const response = await axiosInstance.get('/movie', { params: { title } });
-  return response.data;
+  console.log(`Searching for movie: ${title}`);
+  try {
+    const response = await axiosInstance.get('/movie', { params: { title } });
+    console.log('Search response:', response.data);
+    return response.data;
+  } catch (error) {
+    console.error('Error searching for movie:', error);
+    throw error;
+  }
 };
 
 export const getWeatherMovieRecommendation = async (city: string, lat?: number, lon?: number) => {

@@ -41,3 +41,10 @@ firebase.json
 # IDE specific files
 .vscode
 .idea
+
+# Server specific files
+node_modules
+dist
+.env
+.env.local
+.vercel

@@ -131,9 +131,19 @@ const WeatherMovieRecommendation: React.FC<WeatherMovieRecommendationProps> = ({
         </form>
         
         <AnimatePresence>
+          {isLoading && (
+            <motion.div
+              key="loading" // Add this line
+              initial={{ opacity: 0 }}
+              animate={{ opacity: 1 }}
+              exit={{ opacity: 0 }}
+            >
+              Loading...
+            </motion.div>
+          )}
           {error && (
-            <motion.div 
-              className="text-red-500 mb-4 flex-shrink-0"
+            <motion.div
+              key="error" // Add this line
               initial={{ opacity: 0 }}
               animate={{ opacity: 1 }}
               exit={{ opacity: 0 }}
@@ -144,6 +154,7 @@ const WeatherMovieRecommendation: React.FC<WeatherMovieRecommendationProps> = ({
           
           {multipleCities.length > 0 && (
             <motion.div
+              key="multiple-cities" // Add this line
               initial={{ opacity: 0 }}
               animate={{ opacity: 1 }}
               exit={{ opacity: 0 }}
@@ -167,6 +178,7 @@ const WeatherMovieRecommendation: React.FC<WeatherMovieRecommendationProps> = ({
           
           {selectedCity && (
             <motion.div
+              key="selected-city" // Add this line
               initial={{ opacity: 0, y: -10 }}
               animate={{ opacity: 1, y: 0 }}
               className="mb-2 text-sm text-gray-600 italic"
@@ -177,6 +189,7 @@ const WeatherMovieRecommendation: React.FC<WeatherMovieRecommendationProps> = ({
           
           {displayRecommendation && (
             <motion.div
+              key="recommendation" // Add this line
               initial={{ opacity: 0 }}
               animate={{ opacity: 1 }}
               transition={{ duration: 0.5 }}
