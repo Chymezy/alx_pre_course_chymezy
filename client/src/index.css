@@ -1,0 +1,71 @@
+@tailwind base;
+@tailwind components;
+@tailwind utilities;
+
+@import url('https://fonts.googleapis.com/css2?family=Open+Sans:wght@300;400;500;600;700&display=swap');
+
+body {
+  font-family: 'Open Sans', sans-serif;
+  -webkit-font-smoothing: antialiased;
+  -moz-osx-font-smoothing: grayscale;
+}
+
+@keyframes fadeIn {
+  from { opacity: 0; }
+  to { opacity: 1; }
+}
+
+.animate-fadeIn {
+  animation: fadeIn 0.5s ease-in-out;
+}
+
+@keyframes scroll {
+  0% {
+    transform: translateX(0);
+  }
+  100% {
+    transform: translateX(-50%);
+  }
+}
+
+.payment-scroll {
+  display: flex;
+  width: 200%; /* Double the width to accommodate two sets of logos */
+  animation: scroll 30s linear infinite;
+}
+
+.payment-scroll:hover {
+  animation-play-state: paused;
+}
+
+.payment-scroll-content {
+  display: flex;
+  width: 50%; /* Each set of logos takes up half the total width */
+  justify-content: space-around;
+}
+
+/* Add this at the end of the file */
+.floating-demo-button {
+  display: block;
+}
+
+@media (min-width: 768px) {
+  .floating-demo-button {
+    display: none;
+  }
+}
+
+/* Add the new styles here */
+.try-free-demo-btn {
+  position: fixed;
+  top: 16px; /* adjust this value to match the height of your header */
+  left: 0;
+  right: 0;
+  z-index: 1; /* make sure it's on top of other elements */
+  @apply bg-yellow-400 hover:bg-yellow-500 text-white font-bold;
+}
+
+/* Add a margin to the footer and hero section to avoid overlap */
+footer, .hero-section {
+  @apply mb-16; /* adjust this value to match the height of the Try Free Demo button */
+}
